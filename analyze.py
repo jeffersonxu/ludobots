@@ -1,9 +1,10 @@
 import numpy
 import matplotlib.pyplot
 
-backLegSensorValues = numpy.load("data/backLegSensorValues.npy")
-frontLegSensorValues = numpy.load("data/frontLegSensorValues.npy")
+backLegSensorValues = numpy.load("data/angleValuesBack.npy")
+frontLegSensorValues = numpy.load("data/angleValuesFront.npy")
 matplotlib.pyplot.plot(backLegSensorValues, linewidth=3.5, label="backLeg")
 matplotlib.pyplot.plot(frontLegSensorValues, label="frontLeg")
 matplotlib.pyplot.legend()
+
 matplotlib.pyplot.show()
