@@ -13,7 +13,7 @@ class SOLUTION:
         self.Create_World()
         self.Generate_Body()
         self.Generate_Brain()        
-        os.system(f"python3 simulate.py {directOrGui} {self.myID} &")
+        os.system(f"python3 simulate.py {directOrGui} {self.myID} 2&>1 &")
 
     def Wait_For_Simulation_To_End(self):        
         fitnessFileName = f"fitness{self.myID}.txt"
