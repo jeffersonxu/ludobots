@@ -10,3 +10,5 @@ phaseOffsetBack = 0
 amplitudeFront = math.pi / 4
 frequencyFront = 10
 phaseOffsetFront = math.pi / 4
+
+numberOfGenerations = 10
