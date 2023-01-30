@@ -12,3 +12,4 @@ frequencyFront = 10
 phaseOffsetFront = math.pi / 4
 
 numberOfGenerations = 10
+populationSize = 10
