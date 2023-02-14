@@ -1,5 +1,5 @@
 # ludobots
-This contains my final project for Northwestern CS 396: Artifical Life. This was built using the community [r/ludobots](https://www.reddit.com/r/ludobots/) and depends on [Pyrosim](https://github.com/jbongard/pyrosim). The fitness function for my robot was to maximize going out of the screen (-x direction). The robot is additionally challenged by a small obstacle course and was evolved using paralell hill climbing.
+This contains assignment 6 for Northwestern CS 396: Artifical Life. Specifically, this assignment builds a kinematic chain (a jointed, motorized, innervated, sensorized snake). This was built using the community [r/ludobots](https://www.reddit.com/r/ludobots/) and depends on [Pyrosim](https://github.com/jbongard/pyrosim). As of right now there is no evolution as `numberOfGenerations = 1` and `populationSize = 1` so the snake just sits there and wigles a little bit. A demonstration of the various creatures generated can be seen [here](https://youtu.be/tbStfZbY8Co).
 
 ## Running
 After cloning this repository run the following:
