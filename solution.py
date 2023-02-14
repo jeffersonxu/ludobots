@@ -6,13 +6,16 @@ import pyrosim.pyrosim as pyrosim
 import constants as c
 
 class SOLUTION:
-    def __init__(self, myID):
-        self.weights = numpy.random.rand(c.numSensorNeurons, c.numMotorNeurons) * 2 - 1
-        self.myID = myID
+    def __init__(self, myID, links, joints):
+        self.links = links
+        self.joints = joints
+        self.sensor_num = sum([x['sensor_tag'] for x in links])
+        self.weights = 2 * numpy.random.rand(self.sensor_num, len(joints)) - 1        
+        self.myID = myID   
     
     def Start_Simulation(self, directOrGui):
         self.Create_World()
-        self.Generate_Body()
+        #self.Generate_Body()
         self.Generate_Brain()        
         os.system(f"python3 simulate.py {directOrGui} {self.myID} & 2&>1")
 
@@ -26,12 +29,7 @@ class SOLUTION:
         os.system(f"rm {fitnessFileName}")
 
     def Create_World(self):
-        pyrosim.Start_SDF("world.sdf")    
-        
-        #generate obstacle pattern
-        for i in range(15):
-            pyrosim.Send_Cube(name=f"block_{i}", pos=[-2.5 - i * 0.5, 4, 0.1] , size=[0.25, 20, 0.05], mass=10000)
-
+        pyrosim.Start_SDF("world.sdf")      
         pyrosim.End()
 
     def Generate_Body(self):
@@ -62,35 +60,26 @@ class SOLUTION:
 
     def Generate_Brain(self):
         pyrosim.Start_NeuralNetwork(f"brain{self.myID}.nndf")
-        pyrosim.Send_Sensor_Neuron(name = 0 , linkName = "Torso")
-        pyrosim.Send_Sensor_Neuron(name = 1 , linkName = "BackLeg")
-        pyrosim.Send_Sensor_Neuron(name = 2 , linkName = "FrontLeg")
-        pyrosim.Send_Sensor_Neuron(name = 3, linkName = "LeftLeg")
-        pyrosim.Send_Sensor_Neuron(name = 4, linkName = "RightLeg")
-        pyrosim.Send_Sensor_Neuron(name = 5, linkName="FrontLeg2")
-        pyrosim.Send_Sensor_Neuron(name = 6, linkName="BackLeg2")
-        pyrosim.Send_Sensor_Neuron(name = 7, linkName="LeftLeg2")
-        pyrosim.Send_Sensor_Neuron(name = 8, linkName="RightLeg2")
+        curr_id = 0
+        for i in range(len(self.links)):
+            if self.links[i]['sensor_tag']:
+                pyrosim.Send_Sensor_Neuron(name = curr_id , linkName = self.links[i]['name'])
+                curr_id += 1
 
-        pyrosim.Send_Motor_Neuron(name = 9, jointName = "Torso_BackLeg")
-        pyrosim.Send_Motor_Neuron(name = 10, jointName = 'Torso_FrontLeg')
-        pyrosim.Send_Motor_Neuron(name = 11, jointName="Torso_LeftLeg")
-        pyrosim.Send_Motor_Neuron(name = 12, jointName="Torso_RightLeg")
-        pyrosim.Send_Motor_Neuron(name = 13, jointName="FrontLeg_FrontLeg2")
-        pyrosim.Send_Motor_Neuron(name = 14, jointName="BackLeg_BackLeg2")
-        pyrosim.Send_Motor_Neuron(name = 15, jointName="LeftLeg_LeftLeg2")
-        pyrosim.Send_Motor_Neuron(name = 16, jointName="RightLeg_RightLeg2")
+        for i in range(len(self.joints)):
+            pyrosim.Send_Motor_Neuron(name = curr_id , jointName = self.joints[i]['name'])
+            curr_id += 1
 
-        for currentRow in range(c.numSensorNeurons):
-            for currentColumn in range(c.numMotorNeurons):
-                pyrosim.Send_Synapse(sourceNeuronName=currentRow, targetNeuronName=currentColumn + c.numSensorNeurons, weight=self.weights[currentRow][currentColumn])
-
+        for currentRow in range(self.sensor_num):
+            for currentColumn in range(len(self.joints)):
+                pyrosim.Send_Synapse(sourceNeuronName = currentRow , targetNeuronName = currentColumn + self.sensor_num , weight = self.weights[currentRow][currentColumn] )
         pyrosim.End()
 
     def Mutate(self):
-        randRow = random.randint(0, c.numSensorNeurons - 1)
-        randCol = random.randint(0, c.numMotorNeurons - 1)
+        randRow = random.randint(0, self.sensor_num - 1)
+        randCol = random.randint(0, len(self.joints) - 1)
         self.weights[randRow][randCol] = random.random() * 2 + 1
     
     def Set_ID(self, myID):
         self.myID = myID
+
