@@ -1,17 +1,17 @@
 import copy
 import os
-import random
+import matplotlib.pyplot as plt
 import pyrosim.pyrosim as pyrosim
 from solution import SOLUTION
 from constants import numberOfGenerations, populationSize
 from horse import Generate_Horse
 
 class PARALLEL_HILL_CLIMBER:
-    def __init__(self):
+    def __init__(self, seed):
         self.parents = {}
         self.nextAvailableID = 0
         
-        links, joints = Generate_Horse()
+        links, joints = Generate_Horse(seed)
         pyrosim.Start_URDF("body.urdf")
         for link_dict in links:
             pyrosim.Send_Cube(name=link_dict['name'], pos=link_dict['pos'], size=link_dict['size'], color=link_dict['color'], color_name=link_dict['color_name'])
@@ -20,8 +20,11 @@ class PARALLEL_HILL_CLIMBER:
         pyrosim.End()
 
         for i in range(populationSize):
-            self.parents[i] = SOLUTION(self.nextAvailableID, links, joints)
+            self.parents[i] = SOLUTION(self.nextAvailableID, links, joints, seed)
             self.nextAvailableID += 1        
+
+        self.fitness_history = []
+        
         os.system("rm brain*.nndf")
         os.system("rm fitness*.txt")
     
@@ -36,6 +39,7 @@ class PARALLEL_HILL_CLIMBER:
         self.Evaluate(self.children, directOrGUI)
         self.Print()
         self.Select()
+        self.Save()
     
     def Spawn(self):
         self.children = {}
@@ -66,4 +70,8 @@ class PARALLEL_HILL_CLIMBER:
             parent.Start_Simulation(directOrGUI)
         for parent in solutions.values():
             parent.Wait_For_Simulation_To_End()
+    
+    def Save(self):
+        bestKey = min(self.parents.items(), key=lambda x: x[1].fitness)[0]
+        self.fitness_history.append(self.parents[bestKey].fitness)
             

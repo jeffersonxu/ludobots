@@ -1,10 +1,12 @@
 import pyrosim.pyrosim as pyrosim
-import random
+import numpy
 
-def Generate_Horse():
+def Generate_Horse(seed):
+    numpy.random.seed(seed)
+
     links = {}
     joints = {}
-    num_sec = random.randint(2,5)
+    num_sec = numpy.random.randint(2,5)
     sec_width_range = sec_length_rage = (0.1, 0.6)
     sec_connection_type = "horse"
     leg_width_range = (0.1, 0.4)
@@ -84,7 +86,7 @@ def Generate_Horse():
 
 
 def Get_Link(name, size, pos):
-    sensor_tag = random.choice([True, False])
+    sensor_tag = numpy.random.choice([True, False])
     color_name = 'green' if sensor_tag else 'red'
 
     return {
@@ -98,11 +100,11 @@ def Get_Link(name, size, pos):
 
 def Get_Sizes(sec_width_range, sec_length_range, leg_width_range, leg_length_range):
     body_size = (-1, 0, 0)
-    upper_leg_size_x =  random.uniform(*leg_width_range)
-    lower_leg_size_x = random.uniform(*leg_width_range)
+    upper_leg_size_x =  numpy.random.uniform(*leg_width_range)
+    lower_leg_size_x = numpy.random.uniform(*leg_width_range)
     while body_size[0] < max(upper_leg_size_x, lower_leg_size_x):
-        body_size = (random.uniform(*sec_length_range), random.uniform(*sec_width_range), random.uniform(*sec_width_range))
-        upper_leg_size = (random.uniform(*leg_width_range), random.uniform(*leg_width_range), random.uniform(*leg_length_range))
-        lower_leg_size = (random.uniform(*leg_width_range), random.uniform(*leg_width_range), random.uniform(*leg_length_range))
+        body_size = (numpy.random.uniform(*sec_length_range), numpy.random.uniform(*sec_width_range), numpy.random.uniform(*sec_width_range))
+        upper_leg_size = (numpy.random.uniform(*leg_width_range), numpy.random.uniform(*leg_width_range), numpy.random.uniform(*leg_length_range))
+        lower_leg_size = (numpy.random.uniform(*leg_width_range), numpy.random.uniform(*leg_width_range), numpy.random.uniform(*leg_length_range))
 
     return body_size, upper_leg_size, lower_leg_size

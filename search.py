@@ -1,11 +1,18 @@
-import os
-#from hillclimber import HILL_CLIMBER
+import matplotlib.pyplot as plt
 from parallelHillClimber import PARALLEL_HILL_CLIMBER
 
-# for i in range(5):
-#     os.system("python3 generate.py")
-#     os.system("python3 simulate.py")
+phcs = []
+for i in range(5):
+    phc = PARALLEL_HILL_CLIMBER(i)
+    phc.Evolve()
+    phcs.append(phc)
 
-phc = PARALLEL_HILL_CLIMBER()
-phc.Evolve()
-phc.Show_Best()
+for i, phc in enumerate(phcs):
+    #phc.Show_Best()
+    plt.plot(phc.fitness_history, label=f'Seed {i}')    
+
+plt.ylabel("Average Fitness")
+plt.xlabel("Generation")
+plt.title("Average Fitness using Parallel Hill Climber for 5 Seeds")
+plt.legend()
+plt.show()
