@@ -68,8 +68,8 @@ class PARALLEL_HILL_CLIMBER:
         self.parents[bestKey].Start_Simulation("GUI")
 
         print(f"best parent {sorted_parents[-1][1].myID} of seed-{self.seed}:",sorted_parents[-1][1].fitness)
-        os.system(f"cp body.urdf ./data/seed{self.seed}")
-        os.system(f"cp -n brain*.nndf ./data/seed{self.seed}/brain_best.nndf")
+        os.system(f"cp body.urdf data/seed{self.seed}")
+        os.system(f"cp -n brain*.nndf data/seed{self.seed}/brain_best.nndf")
     
     def Evaluate(self, solutions, directOrGUI):
         for parent in solutions.values():

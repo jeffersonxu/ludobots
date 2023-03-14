@@ -12,12 +12,13 @@ class SOLUTION:
         self.sensor_num = sum([x['sensor_tag'] for x in links])
         self.weights = 2 * numpy.random.rand(self.sensor_num, len(joints)) - 1        
         self.myID = myID   
+        self.seed = seed
         numpy.random.seed(seed)
     
     def Start_Simulation(self, directOrGui):
         self.Create_World()
         self.Generate_Brain()        
-        os.system(f"python3 simulate.py {directOrGui} {self.myID} & 2&>1")
+        os.system(f"python3 simulate.py {directOrGui} {self.myID} {self.seed} & 2&>1")
 
     def Wait_For_Simulation_To_End(self):        
         fitnessFileName = f"fitness{self.myID}.txt"
