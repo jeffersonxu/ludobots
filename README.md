@@ -17,7 +17,7 @@ def Evolve_For_One_Generation(self, directOrGUI):
 ### Spawn
 Generating the horse-like creature is quite simple. The general flow can be seen below by the diagram alongisde an example of a generated creature. The generation of the creature can be seen in `horse.py`
 ![alt text](https://github.com/jeffersonxu/ludobots/blob/assignment8/algorithm.png)
-![alt text](https://github.com/jeffersonxu/ludobots/blob/assignment8/diagram.jpg)
+![alt text](https://github.com/jeffersonxu/ludobots/blob/assignment8/parallel.jpeg)
 
 ### Mutation
 Mutations were kept quite simple and would be the main area that can be improved upon for this project. As of right now the only mutation that occurs is the adjusting of synaptic weights shown in `solution.py` and the code below:
@@ -35,6 +35,10 @@ As stated earlier, the fitness algorithm is the negative x direction so the next
 
 #### What is Paralell Hill Climbing?
 Imagine you are trying to climb a hill and you can only move up or down. You start at the bottom of the hill and keep trying different paths until you find the highest point. Now imagine there are several people trying to climb the same hill at the same time. Each person takes a different path, and they all try to find the highest point. Once everyone reaches the top, they compare their heights and choose the person who climbed the highest as the winner. Parallel Hill Climbing is similar to this idea. Instead of people, we use computer programs to try different solutions to a problem. Each program takes a different approach and tries to find the best solution. Once all the programs have finished, we compare their results and choose the program that found the best solution as the winner. This method is often used to solve optimization problems, where we want to find the best solution out of many possible solutions.
+
+An example of the flow of the algorithm is shown below
+![alt text](https://github.com/jeffersonxu/ludobots/blob/assignment8/parallel.png)
+
 
 ### Running and Replaying
 To run the following experiment use the following command:
