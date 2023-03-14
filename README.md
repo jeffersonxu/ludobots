@@ -2,8 +2,6 @@
 This contains the final project for Northwestern CS 396: Artifical Life. In short, this project uses the parallel hill climber to design morphology and behavior for locomotion with a fitness algorithm of the general negative X direction. My algorithm creates horse like structures with legs on each side similar to the quadraped. This was built using the community [r/ludobots](https://www.reddit.com/r/ludobots/) and depends on [Pyrosim](https://github.com/jbongard/pyrosim). 
 
 ## Methods
-Methods. Explain what you did and how you did it. Where is the code to do each step? How do you run it? Cartoons of the genotype-to-phenotype map (how brains/bodies are encoded and expressed to form a robot), mutations (explain all the ways to make offspring and how they can be dis/similar to parents), selection (how does the parallel hill climber or whatever algo you use, work?)
-
 The experiment starts off in `search.py` which utilizes the `PARALLEL_HILL_CLIMBER` class. Within this class we can see the main structure used for  evolution in `parallellHillClimber.py`: Spawn -> Mutate -> Evaluate -> Select -> Save. In summary, for the experiment a creature gets generated and then mutates. Among the mutated the creatures, they are evaluated based off a fitness score (negative x direction) and the one that performs the best gets selected as the new parent. The cycle then repeats until it reaches the number of generations desired as defined in `constants.py`
 ```python
 def Evolve_For_One_Generation(self, directOrGUI):
@@ -17,7 +15,7 @@ def Evolve_For_One_Generation(self, directOrGUI):
 ### Spawn
 Generating the horse-like creature is quite simple. The general flow can be seen below by the diagram alongisde an example of a generated creature. The generation of the creature can be seen in `horse.py`
 ![alt text](https://github.com/jeffersonxu/ludobots/blob/assignment8/algorithm.png)
-![alt text](https://github.com/jeffersonxu/ludobots/blob/assignment8/parallel.jpeg)
+![alt text](https://github.com/jeffersonxu/ludobots/blob/assignment8/genotype.jpeg)
 
 ### Mutation
 Mutations were kept quite simple and would be the main area that can be improved upon for this project. As of right now the only mutation that occurs is the adjusting of synaptic weights shown in `solution.py` and the code below:
