@@ -12,7 +12,7 @@ amplitudeFront = math.pi / 4
 frequencyFront = 10
 phaseOffsetFront = math.pi / 4
 
-numberOfGenerations = 20
+numberOfGenerations = 500
 populationSize = 10
 
 numSensorNeurons = 9

@@ -4,6 +4,7 @@ import numpy
 import pyrosim.pyrosim as pyrosim
 import constants as c
 
+identical_worlds_bodies = True
 
 class SOLUTION:
     def __init__(self, myID, links, joints, seed):
@@ -16,7 +17,8 @@ class SOLUTION:
         numpy.random.seed(seed)
     
     def Start_Simulation(self, directOrGui):
-        self.Create_World()
+        if self.myID == 0: 
+            self.Create_World()
         self.Generate_Brain()        
         os.system(f"python3 simulate.py {directOrGui} {self.myID} {self.seed} & 2&>1")
 

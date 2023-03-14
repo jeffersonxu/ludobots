@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 from parallelHillClimber import PARALLEL_HILL_CLIMBER
 
 phcs = []
-for i in range(3):
+for i in range(10):
     phc = PARALLEL_HILL_CLIMBER(i)
     phc.Evolve()
     phcs.append(phc)
@@ -13,6 +13,6 @@ for i, phc in enumerate(phcs):
 
 plt.ylabel("Average Fitness")
 plt.xlabel("Generation")
-plt.title("Average Fitness using Parallel Hill Climber for 5 Seeds")
+plt.title("Average Fitness using Parallel Hill Climber for 10 Seeds")
 plt.legend()
 plt.show()
