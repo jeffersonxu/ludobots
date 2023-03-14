@@ -28,6 +28,7 @@ def Mutate(self):
     self.weights[randRow, randCol] = numpy.random.uniform(1, 3)
 ```
 These mutations can also be visualized with the following diagram
+![alt text](https://github.com/jeffersonxu/ludobots/blob/assignment8/mutation.png)
 
 ### Evaluate + Select
 As stated earlier, the fitness algorithm is the negative x direction so the next generation improves only if they move in that direction. The algorithm of selection is paralell hill climbing. 
