@@ -2,13 +2,13 @@ import matplotlib.pyplot as plt
 from parallelHillClimber import PARALLEL_HILL_CLIMBER
 
 phcs = []
-for i in range(5):
+for i in range(1):
     phc = PARALLEL_HILL_CLIMBER(i)
     phc.Evolve()
     phcs.append(phc)
 
 for i, phc in enumerate(phcs):
-    #phc.Show_Best()
+    phc.Show_Best()
     plt.plot(phc.fitness_history, label=f'Seed {i}')    
 
 plt.ylabel("Average Fitness")

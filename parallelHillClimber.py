@@ -10,6 +10,7 @@ class PARALLEL_HILL_CLIMBER:
     def __init__(self, seed):
         self.parents = {}
         self.nextAvailableID = 0
+        self.seed = seed
         
         links, joints = Generate_Horse(seed)
         pyrosim.Start_URDF("body.urdf")
@@ -37,7 +38,7 @@ class PARALLEL_HILL_CLIMBER:
         self.Spawn()
         self.Mutate()
         self.Evaluate(self.children, directOrGUI)
-        self.Print()
+        #self.Print()
         self.Select()
         self.Save()
     
@@ -63,7 +64,12 @@ class PARALLEL_HILL_CLIMBER:
 
     def Show_Best(self):
         bestKey = min(self.parents.items(), key=lambda x: x[1].fitness)[0] 
+        sorted_parents = sorted(self.parents.items(), key=lambda x: x[1].fitness)
         self.parents[bestKey].Start_Simulation("GUI")
+
+        print(f"best parent {sorted_parents[-1][1].myID} of seed-{self.seed}:",sorted_parents[-1][1].fitness)
+        os.system(f"cp body.urdf ./data/seed{self.seed}")
+        os.system(f"cp -n brain*.nndf ./data/seed{self.seed}/brain_best.nndf")
     
     def Evaluate(self, solutions, directOrGUI):
         for parent in solutions.values():
