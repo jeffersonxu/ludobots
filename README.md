@@ -4,7 +4,7 @@ This contains the final project for Northwestern CS 396: Artifical Life. In shor
 ## Methods
 Methods. Explain what you did and how you did it. Where is the code to do each step? How do you run it? Cartoons of the genotype-to-phenotype map (how brains/bodies are encoded and expressed to form a robot), mutations (explain all the ways to make offspring and how they can be dis/similar to parents), selection (how does the parallel hill climber or whatever algo you use, work?)
 
-The experiment starts off in `search.py` which utilizes the `PARALLEL_HILL_CLIMBER` class. Within this class we can see the main structure used for  evolution in `parallellHillClimber.py`
+The experiment starts off in `search.py` which utilizes the `PARALLEL_HILL_CLIMBER` class. Within this class we can see the main structure used for  evolution in `parallellHillClimber.py`: Spawn -> Mutate -> Evaluate -> Select -> Save
 ```python
 def Evolve_For_One_Generation(self, directOrGUI):
     self.Spawn()
@@ -14,6 +14,9 @@ def Evolve_For_One_Generation(self, directOrGUI):
     self.Select()
     self.Save()
 ```
+### Spawn
+![alt text](https://github.com/jeffersonxu/ludobots/blob/assignment8/algorithm.png)
+
 
 ### What is Paralell Hill Climbing?
 Imagine you are trying to climb a hill and you can only move up or down. You start at the bottom of the hill and keep trying different paths until you find the highest point. Now imagine there are several people trying to climb the same hill at the same time. Each person takes a different path, and they all try to find the highest point. Once everyone reaches the top, they compare their heights and choose the person who climbed the highest as the winner. Parallel Hill Climbing is similar to this idea. Instead of people, we use computer programs to try different solutions to a problem. Each program takes a different approach and tries to find the best solution. Once all the programs have finished, we compare their results and choose the program that found the best solution as the winner. This method is often used to solve optimization problems, where we want to find the best solution out of many possible solutions.
