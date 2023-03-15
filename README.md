@@ -2,6 +2,7 @@
 This contains the final project for Northwestern CS 396: Artifical Life. In short, this project uses the parallel hill climber to design morphology and behavior for locomotion with a fitness algorithm of the general negative X direction. My algorithm creates horse like structures with legs on each side similar to the quadraped. This was built using the community [r/ludobots](https://www.reddit.com/r/ludobots/) and depends on [Pyrosim](https://github.com/jbongard/pyrosim). 
 ![alt text](https://github.com/jeffersonxu/ludobots/blob/assignment8/final.gif)
 
+### [Final Project Video](https://youtu.be/oUPcq3XFy1s)
 
 ## Methods
 The experiment starts off in `search.py` which utilizes the `PARALLEL_HILL_CLIMBER` class. Within this class we can see the main structure used for  evolution in `parallellHillClimber.py`: Spawn -> Mutate -> Evaluate -> Select -> Save. In summary, for the experiment a creature gets generated and then mutates. Among the mutated the creatures, they are evaluated based off a fitness score (negative x direction) and the one that performs the best gets selected as the new parent. The cycle then repeats until it reaches the number of generations desired as defined in `constants.py`
